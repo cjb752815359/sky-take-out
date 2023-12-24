@@ -15,6 +15,7 @@ import com.sky.exception.AccountNotFoundException;
 import com.sky.exception.PasswordErrorException;
 import com.sky.mapper.EmployeeMapper;
 import com.sky.result.PageResult;
+import com.sky.result.Result;
 import com.sky.service.EmployeeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,6 +101,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         return new PageResult(page.getTotal(), page.getResult());
     }
 
+    /**
+     * 员工状态更新
+     *
+     * @param status
+     * @param id
+     */
     public void updateEmployeeStatus(Integer status, Long id){
         Employee employee = Employee.builder()
                 .status(status)
@@ -107,6 +114,32 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .build();
 
         employeeMapper.updateEmployee(employee);
+    }
+
+    /**
+     * 更新员工信息
+     *
+     * @param employeeDTO
+     */
+    public void updateEmployee(EmployeeDTO employeeDTO){
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDTO, employee);
+
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser(BaseContext.getCurrentId());
+
+        employeeMapper.updateEmployee(employee);
+    }
+
+    /**
+     * 员工查询
+     *
+     * @param id
+     * @return
+     */
+    public Employee getEmployeeById(Integer id){
+        Employee employee = employeeMapper.getEmployeeById(id);
+        return employee;
     }
 
 }

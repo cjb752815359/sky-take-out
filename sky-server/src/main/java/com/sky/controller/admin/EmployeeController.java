@@ -13,6 +13,7 @@ import com.sky.utils.JwtUtil;
 import com.sky.vo.EmployeeLoginVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -115,6 +116,34 @@ public class EmployeeController {
     public Result updateEmployeeStatus(@PathVariable Integer status, Long id){
         log.info("员工状态更新:{},{}", status, id);
         employeeService.updateEmployeeStatus(status, id);
+        return Result.success();
+    }
+
+    /**
+     * 员工查询
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ApiOperation(value = "员工查询")
+    public Result<Employee> getEmployeeById(@PathVariable Integer id){
+        log.info("查询员工:{}", id);
+        Employee employee = employeeService.getEmployeeById(id);
+        return Result.success(employee);
+    }
+
+    /**
+     * 更新员工信息
+     *
+     * @param employeeDTO
+     * @return
+     */
+    @PutMapping
+    @ApiOperation(value = "更新员工信息")
+    public Result updateEmployee(@RequestBody EmployeeDTO employeeDTO){
+        log.info("更新员工信息");
+        employeeService.updateEmployee(employeeDTO);
         return Result.success();
     }
 }
