@@ -82,7 +82,7 @@ public class EmployeeController {
      *
      * @return
      */
-    @PostMapping("/register")
+    @PostMapping
     @ApiOperation(value = "员工注册")
     public Result register(@RequestBody EmployeeDTO employeeDTO){
         log.info("新增员工: {}", employeeDTO);
