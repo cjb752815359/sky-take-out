@@ -100,4 +100,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         return new PageResult(page.getTotal(), page.getResult());
     }
 
+    public void updateEmployeeStatus(Integer status, Long id){
+        Employee employee = Employee.builder()
+                .status(status)
+                .id(id)
+                .build();
+
+        employeeMapper.updateEmployee(employee);
+    }
+
 }
