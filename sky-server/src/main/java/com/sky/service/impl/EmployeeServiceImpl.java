@@ -79,6 +79,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         // TODO:修改为当前用户的id
         employee.setCreateUser(1L);
         employee.setUpdateUser(1L);
+        employeeMapper.insertEmployee(employee);
     }
 
 }

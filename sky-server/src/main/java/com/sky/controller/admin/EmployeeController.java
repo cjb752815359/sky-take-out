@@ -87,6 +87,6 @@ public class EmployeeController {
     public Result register(@RequestBody EmployeeDTO employeeDTO){
         log.info("新增员工: {}", employeeDTO);
         employeeService.register(employeeDTO);
-        return null;
+        return Result.success();
     }
 }
